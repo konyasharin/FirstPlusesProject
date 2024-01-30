@@ -60,8 +60,10 @@ void AInstancedActorBuilder::CreateInstances() const
 	{
 		for(int j = 0; j < CountY; j++)
 		{
-			BaseInstancedMesh->AddInstance(FTransform(FVector(BaseInstancedMeshLocation.X + XAmplitude * i,
-				BaseInstancedMeshLocation.Y + YAmplitude * j, BaseInstancedMeshLocation.Z)), true);
+			FTransform CurrentTransform = FTransform(FVector(BaseInstancedMeshLocation.X + XAmplitude * i,
+				BaseInstancedMeshLocation.Y + YAmplitude * j, BaseInstancedMeshLocation.Z));
+			CurrentTransform.SetRotation(BaseInstancedMesh->GetComponentRotation().Quaternion());
+			BaseInstancedMesh->AddInstance(CurrentTransform, true);
 		}
 	}
 }
